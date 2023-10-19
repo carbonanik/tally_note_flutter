@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>303271847349-8fkv1km028a8o5lodqitaanftvqmnq3f.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyA_M0ssmyw31xmQyEz_1jLVuPezkwEEhU0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>303271847349</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.carbondev.flutter.tallyNoteFlutter</string>
+	<key>PROJECT_ID</key>
+	<string>tally-khata</string>
+	<key>STORAGE_BUCKET</key>
+	<string>tally-khata.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:303271847349:ios:5002a6c02d807c515f65fc</string>
+	<key>DATABASE_URL</key>
+	<string>https://tally-khata.firebaseio.com</string>
+</dict>
+</plist>

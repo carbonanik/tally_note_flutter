@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "303271847349",
+    "firebase_url": "https://tally-khata.firebaseio.com",
+    "project_id": "tally-khata",
+    "storage_bucket": "tally-khata.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:303271847349:android:769496692a3345fd5f65fc",
+        "android_client_info": {
+          "package_name": "com.carbondev.flutter.tally_note_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "303271847349-6rpb06u4j16s4ravg07c1j3ej9khvjj3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDq-25khtGa4fzwsO0FbBYPmmPbgq0R-Vc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "303271847349-6rpb06u4j16s4ravg07c1j3ej9khvjj3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
