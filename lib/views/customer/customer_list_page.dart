@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tally_note_flutter/state/customers/models/customer.dart';
+import 'package:tally_note_flutter/state/customers/provider/add_customer_provider.dart';
 import 'package:tally_note_flutter/state/customers/provider/customer_provider.dart';
 import 'package:tally_note_flutter/state/customers/provider/customer_search_bar_provider.dart';
 import 'package:tally_note_flutter/state/customers/provider/customer_search_text_provider.dart';
-import 'package:tally_note_flutter/state/customers/provider/searchedCustomerProvider.dart';
+import 'package:tally_note_flutter/state/customers/provider/searched_customer_provider.dart';
+import 'package:tally_note_flutter/util/due_or_adv.dart';
+import 'package:tally_note_flutter/util/log.dart';
+import 'package:tally_note_flutter/views/component/my_snack_bar.dart';
+import 'package:tally_note_flutter/views/customer/dialog/create_or_update_customer.dart';
 import 'package:tally_note_flutter/views/sell/sell_list_page.dart';
 import 'package:tally_note_flutter/views/setting/setting_page.dart';
 
 class CustomerListPage extends ConsumerWidget {
-  const CustomerListPage({super.key});
+  CustomerListPage({super.key});
 
   Widget _searchTextField(WidgetRef ref) {
     return TextField(
@@ -18,6 +23,10 @@ class CustomerListPage extends ConsumerWidget {
       },
     );
   }
+
+  final nameController = TextEditingController();
+  final phoneController = TextEditingController();
+  final addressController = TextEditingController();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -63,8 +72,20 @@ class CustomerListPage extends ConsumerWidget {
         backgroundColor: Colors.grey[900],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-
+        onPressed: () async {
+          final customer = await createOrUpdateCustomerDialog(
+            context,
+            null,
+            nameController,
+            phoneController,
+            addressController,
+          );
+          // customer.log();
+          if (customer != null) {
+            await ref.read(addCustomerProvider(customer).future);
+          } else {
+            showSnackBar(context, "Customer not added");
+          }
         },
         child: const Icon(Icons.add),
       ),
@@ -88,33 +109,40 @@ class CustomerListPage extends ConsumerWidget {
       data: (data) {
         final list = data.value.toList();
         return list.isNotEmpty
-            ? ListView.builder(
+            ? ListView.separated(
                 itemCount: list.length,
+                separatorBuilder: (context, index) {
+                  return const Divider(color: Colors.blueGrey);
+                },
                 itemBuilder: (_, index) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-                    child: ListTile(
-                      tileColor: Colors.grey[900],
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SellListPage(
-                              customerId: list[index].key,
-                            ),
-                          ),
-                        );
-                      },
-                      title: Padding(
-                        padding: const EdgeInsets.only(top: 4, bottom: 8.0),
-                        child: Text(list[index].name, style: Theme.of(context).textTheme.headlineSmall),
-                      ),
-                      subtitle: Padding(
-                        padding: const EdgeInsets.only(bottom: 4.0),
-                        child: Text("Due: ${list[index].totalDue}"),
-                      ),
-                      // trailing: IconButton(icon: const Icon(Icons.add), onPressed: () {  },),
+                  return ListTile(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return SellListPage(
+                              customerKey: list[index].key,
+                            );
+                          },
+                        ),
+                      );
+                    },
+                    title: Padding(
+                      padding: const EdgeInsets.only(top: 4, bottom: 8.0),
+                      child: Text(list[index].name, style: Theme.of(context).textTheme.headlineSmall),
                     ),
+                    subtitle: Padding(
+                      padding: const EdgeInsets.only(bottom: 4.0),
+                      child: Text(
+                        findDueOrAdv(
+                          amount: list[index].totalDue,
+                          duePrefix: "Due: ",
+                          advPrefix: "Adv: ",
+                        ),
+                      ),
+                    ),
+                    // trailing: IconButton(icon: const Icon(Icons.add), onPressed: () {  },),
                   );
                 },
               )

@@ -16,4 +16,17 @@ class Product {
       price: json['price'],
     );
   }
+
+  Map toJson() {
+    return {
+      'productName': productName,
+      'detail': detail,
+      'price': price,
+    };
+  }
+
+  @override
+  String toString() {
+    return 'Product{productName: $productName, detail: $detail, price: $price}';
+  }
 }

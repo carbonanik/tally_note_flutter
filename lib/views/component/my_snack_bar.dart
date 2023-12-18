@@ -5,7 +5,7 @@ showSnackBar(BuildContext context, String message) {
     SnackBar(
       behavior: SnackBarBehavior.floating,
       margin: const EdgeInsets.all(16.0),
-      backgroundColor: Colors.grey.shade900,
+      backgroundColor: Colors.blueGrey.shade700,
       content: Container(
         padding: const EdgeInsets.all(8.0),
         child: Center(

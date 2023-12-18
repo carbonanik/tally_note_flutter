@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:tally_note_flutter/state/sell/model/sell.dart';
+import 'package:tally_note_flutter/util/due_or_adv.dart';
 
 class SellWidget extends StatelessWidget {
   const SellWidget({
@@ -97,13 +98,11 @@ class SellWidget extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    // "Before Due: ${sell.beforeDue}",
                     findDueOrAdv(amount: sell.beforeDue, duePrefix: "Before Due: ", advPrefix: "Before Adv: "),
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    // "After Due: ${sell.afterDue}",
                     findDueOrAdv(amount: sell.afterDue, duePrefix: "After Due: ", advPrefix: "After Adv: "),
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
@@ -160,17 +159,5 @@ class SellWidget extends StatelessWidget {
         ),
       ],
     );
-  }
-}
-
-String findDueOrAdv({
-  required String amount,
-  required String duePrefix,
-  required String advPrefix,
-}) {
-  if (amount[0] == '-') {
-    return advPrefix + amount.substring(1);
-  } else {
-    return duePrefix + amount;
   }
 }
